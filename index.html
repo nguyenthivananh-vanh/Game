@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header {
+            border: 1px solid black;
+            background-color: aqua;
+            text-align: center;
+        }
+        
+        .body {
+            border: 1px solid black;
+            background-color: #010165;
+        }
+        
+        .flex {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .flex h3 {
+            color: aqua;
+        }
+        
+        .text {
+            margin-left: 20px;
+            margin-top: 25px;
+        }
+        
+        .text div {
+            color: white;
+        }
+        
+        .textt {
+            margin-bottom: 30px;
+        }
+        
+        .flex div {
+            margin-right: 20px;
+        }
+        
+        .button {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .btn__input {
+            background-color: orangered;
+            color: white;
+            width: 150px;
+            height: 50px;
+            font-size: 20px;
+            text-align: center;
+            outline: none;
+        }
+        
+        .number h1 {
+            color: aqua;
+        }
+        
+        .buttonso {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+        
+        .buttonso {
+            font-size: 70px;
+            padding: 25px 25px;
+            color: red;
+            text-align: center;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header -->
+    <div class="header">
+        <img src="./images/logo.svg" alt="">
+    </div>
+
+    <!-- body -->
+    <div class="body">
+        <!-- instructions -->
+        <div class="flex">
+            <img src="./images/star.svg" alt="">
+            <h3>Instructions</h3>
+            <img src="./images/star.svg" alt="">
+        </div>
+        <div class="flex">
+            <!-- số -->
+            <div class="number">
+                <h1 class="textt">1</h1>
+                <h1 class="textt">2</h1>
+                <h1>3</h1>
+                <h1>4</h1>
+
+            </div>
+            <!-- chữ -->
+            <div class="text">
+                <div class="textt">Hiding behind one of these doors is the <br>ChoreBot</div>
+                <div class="textt">Your mission is to open all of the doors <br>without eunning into the ChoreBot.</div>
+                <div class="textt">If you manage to avoid the ChoreBot until the <br>very last door, you win!</div>
+                <div class="textt">See if you can score a winning streak!</div>
+            </div>
+
+        </div>
+        <!-- cửa sổ -->
+        <div class="flex">
+            <div>
+                <button id=" click1 " onclick="Randomimg1()">
+                    <img id="img1" src="./images/closed_door.svg" alt="">
+                </button>
+
+            </div>
+            <div>
+                <button id="click2 " onclick="Randomimg2()">
+                    <img id="img2" src="./images/closed_door.svg" alt="">
+                </button>
+
+            </div>
+            <div>
+                <button id="click3 " onclick="Randomimg3()">
+                    <img id="img3" src="./images/closed_door.svg" alt=" ">
+                </button>
+            </div>
+        </div>
+
+        <!-- chọn -->
+        <div class="button " onclick="select()">
+            <input type="text" id='result' class="btn__input" disabled>
+        </div>
+
+        <!-- tỉ số -->
+        <div class="flex ">
+            <div>
+                <div style="color: white;font-size: 20px; text-align: center;">Current streak:</div>
+                <div class="button ">
+                    <input class="buttonso " type="text" name="" id="currentStreak" disabled>
+                </div>
+            </div>
+
+            <div>
+                <div style="color: white;font-size: 20px; text-align: center; ">Best streak:</div>
+                <div class="button ">
+                    <input class="buttonso " type="text" name="" id="bestStreak" disabled>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+
+    <script>
+        // tao mang gom 3 anh
+        var images = ["./images/robot.svg ", "./images/space.svg ", "./images/beach.svg "];
+
+        var img1 = document.querySelector("#img1");
+        var img2 = document.querySelector("#img2");
+        var img3 = document.querySelector("#img3");
+        var rnd1, rnd2, rnd3;
+
+        function randomm() {
+            rnd1 = Math.floor((Math.random() * images.length));
+            rnd2 = Math.floor((Math.random() * images.length));
+            rnd3 = Math.floor((Math.random() * images.length));
+            return rnd1, rnd2, rnd3;
+        }
+
+
+        var current = 0;
+        var best = 0;
+        var bestStreak = 0;
+
+        function check() {
+            randomm();
+            while (rnd1 == rnd2 || rnd2 == rnd3 || rnd1 == rnd3) {
+                randomm();
+            }
+            return rnd1, rnd2, rnd3;
+
+        }
+        check();
+
+        var count = 0;
+        console.log(rnd1, rnd2, rnd3);
+
+        function Randomimg1() {
+            img1.src = images[rnd1];
+            if (rnd1 == 0 && count == 2) {
+                document.getElementById('result').value = 'You win';
+                checkWin();
+
+            } else if (rnd1 == 0) {
+                document.getElementById('result').value = 'Game over';
+                checkFail();
+            } else {
+                count++;
+            }
+        }
+
+        function Randomimg2() {
+            img2.src = images[rnd2];
+            if (rnd2 == 0 && count == 2) {
+                document.getElementById('result').value = 'You win';
+                checkWin();
+            } else if (rnd2 == 0) {
+                document.getElementById('result').value = 'Game over';
+                checkFail();
+            } else {
+                count++;
+            }
+        }
+
+        function Randomimg3() {
+            img3.src = images[rnd3];
+            if (rnd3 == 0 && count == 2) {
+                document.getElementById('result').value = 'You win';
+                checkWin();
+            } else if (rnd3 == 0) {
+                document.getElementById('result').value = 'Game over';
+                checkFail();
+            } else {
+                count++;
+            }
+        }
+
+        function select() {
+            img1.src = './images/closed_door.svg';
+            img2.src = './images/closed_door.svg';
+            img3.src = './images/closed_door.svg';
+            count = 0;
+            check();
+        }
+
+        function checkWin() {
+            current++;
+            best++;
+            document.getElementById('currentStreak').value = current;
+            document.getElementById('bestStreak').value = bestStreak;
+            setTimeout(function() {
+                document.getElementById('result').value = 'Next';
+            }, 1000);
+            console.log(current, best);
+            console.log(rnd1, rnd2, rnd3);
+        }
+
+        function checkFail() {
+            current = 0;
+            console.log(current, best);
+            setTimeout(function() {
+                document.getElementById('result').value = 'Play again';
+            }, 1000);
+            if (bestStreak < best) {
+                bestStreak = best;
+                document.getElementById('bestStreak').value = bestStreak;
+                best = 0;
+            }
+            document.getElementById('currentStreak').value = current;
+        }
+    </script>
+</body>
+
+</html>
